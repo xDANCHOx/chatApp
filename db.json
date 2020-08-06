@@ -1,0 +1,45 @@
+{
+  "messages": [
+    {
+      "text": "fwfwafaw",
+      "time": "02:32:58",
+      "id": 1
+    },
+    {
+      "text": "fdfsdf",
+      "name": "qwerty",
+      "time": "02:33:48",
+      "id": 2
+    },
+    {
+      "text": "fsdfsdfds",
+      "name": "qwerty",
+      "time": "02:33:48",
+      "id": 3
+    },
+    {
+      "text": "fsfsafasfasf",
+      "name": "zxcvb",
+      "time": "02:34:07",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "name": "danil",
+      "id": 1
+    },
+    {
+      "name": "danil",
+      "id": 2
+    },
+    {
+      "name": "qwerty",
+      "id": 3
+    },
+    {
+      "name": "zxcvb",
+      "id": 4
+    }
+  ]
+}
