@@ -10,15 +10,18 @@
         <b-avatar class="rounded-circle user-img" size="40px"></b-avatar>
       </div>
       <div
-        :class="user === message.name ? 'msg-container-send' : 'msg-container'"
+        class="msg-container"
+        :class="{ 'msg-container-send': user === message.name }"
       >
         <p v-if="user !== message.name" class="msg-container-user">
           {{ message.name }}
         </p>
         {{ message.text }}
-        <span :class="user === message.name ? 'msg-time-send' : 'msg-time'">{{
-          message.time
-        }}</span>
+        <span
+          class="msg-time"
+          :class="{ 'msg-time-send': user === message.name }"
+          >{{ message.time }}</span
+        >
       </div>
     </div>
   </div>
@@ -51,32 +54,23 @@ export default {
   padding: 10px;
   position: relative;
 }
-.msg-time {
-  position: absolute;
-  left: 0;
-  bottom: -15px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-}
 .msg-container-send {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 10px;
-  border-radius: 25px;
   background-color: #78e08f;
-  padding: 10px;
-  position: relative;
 }
 .msg-container-user {
   color: #ffffff;
   font-size: 20px;
   margin-bottom: 0;
 }
-.msg-time-send {
+.msg-time {
   position: absolute;
-  right: 0;
-  bottom: -15px;
+  left: 0;
+  bottom: -18px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
+}
+.msg-time-send {
+  right: 0;
+  left: auto;
 }
 </style>

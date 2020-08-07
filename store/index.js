@@ -10,13 +10,30 @@ export const mutations = {
   LOAD_MESSAGES: (state, messages) => {
     state.messages = messages;
   },
+  LOAD_USERS: (state, users) => {
+    state.users = users;
+  },
 };
 export const actions = {
+  newUser({ dispatch }, user) {
+    this.$axios
+      .post('http://localhost:3000/users', user, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(() => {
+        dispatch('loadUser');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   loadUser({ commit }) {
     this.$axios
       .get('http://localhost:3000/users')
       .then((response) => {
-        console.log(response);
+        commit('LOAD_USERS', response.data);
       })
       .catch((error) => {
         console.log(error);

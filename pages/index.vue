@@ -33,25 +33,35 @@ export default {
   },
   computed: {
     isDisabled() {
-      if (this.user !== '') {
+      if (this.user.name !== '') {
         return false;
       } else return true;
     },
+    users() {
+      return this.$store.state.users;
+    },
+    existedUser() {
+      let result = true;
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].name === this.user.name) {
+          result = false;
+        }
+      }
+      return result;
+    },
+  },
+  mounted() {
+    this.$store.dispatch('loadUser');
   },
   methods: {
     submit() {
+      this.user.name =
+        this.user.name.charAt(0).toUpperCase() + this.user.name.slice(1);
+      if (this.existedUser) {
+        this.$store.dispatch('newUser', this.user);
+      }
       this.$store.commit('SET_USER', this.user.name);
       this.$router.push('/chat');
-      this.$axios
-        .post('http://localhost:3000/users', this.user, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
 };

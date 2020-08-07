@@ -5,7 +5,11 @@
         <div class="card mb-sm-3 mb-md-0 contacts_card">
           <div class="card-body contacts_body">
             <ul class="contacts">
-              <li class="active">
+              <li
+                v-for="item in users"
+                :key="item.id"
+                :class="{ active: item.name === user }"
+              >
                 <div class="d-flex">
                   <div class="img_cont">
                     <b-avatar
@@ -15,7 +19,7 @@
                     <span class="online_icon"></span>
                   </div>
                   <div class="user_info">
-                    <span>{{ user }}</span>
+                    <span>{{ item.name }}</span>
                   </div>
                 </div>
               </li>
@@ -28,7 +32,7 @@
           <div class="card-header msg_head">
             <h1 style="color: white;">Chat</h1>
           </div>
-          <div class="card-body msg_card_body">
+          <div ref="chat" class="card-body msg_card_body">
             <Message
               v-for="(message, index) in messages"
               :key="`message-${index}`"
@@ -57,6 +61,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Message from '@/components/Message';
 export default {
   components: {
@@ -72,21 +77,21 @@ export default {
     };
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
-    messages() {
-      return this.$store.state.messages;
-    },
+    ...mapState(['user', 'messages', 'users']),
   },
   mounted() {
-    this.$store.dispatch('loadMessages');
+    setInterval(() => this.$store.dispatch('loadMessages'), 2000);
   },
   methods: {
     send() {
       this.data.name = this.user;
       this.$store.dispatch('sendMessage', this.data);
-      setTimeout(() => (this.data.text = ''), 10);
+      setTimeout(() => {
+        this.data.text = '';
+        if (this.$refs.chat) {
+          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+        }
+      }, 100);
     },
   },
 };
@@ -99,12 +104,13 @@ export default {
 }
 .contacts_body {
   padding: 0.75rem 0 !important;
-  overflow-y: auto;
   white-space: nowrap;
 }
 .contacts {
   list-style: none;
   padding: 0;
+  overflow: auto;
+  height: 400px;
 }
 .contacts li {
   width: 100% !important;

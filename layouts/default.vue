@@ -34,4 +34,15 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  outline: 1px solid slategrey;
+}
 </style>
