@@ -9,8 +9,6 @@ USER gitpod
 #     sudo apt-get install -yq bastet && \
 #     sudo rm -rf /var/lib/apt/lists/*
 #
-RUN npm install -g @vue/cli
 RUN npm install -g json-server
 
-RUN npm install - g  apollo-server graphql
 # More information: https://www.gitpod.io/docs/config-docker/
