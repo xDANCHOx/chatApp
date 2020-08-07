@@ -1,3 +1,4 @@
+const api = process.env.API_URL;
 export const state = () => ({
   user: '',
   messages: [],
@@ -17,7 +18,7 @@ export const mutations = {
 export const actions = {
   newUser({ dispatch }, user) {
     this.$axios
-      .post('http://localhost:3000/users', user, {
+      .post(api + '/users', user, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -31,7 +32,7 @@ export const actions = {
   },
   loadUser({ commit }) {
     this.$axios
-      .get('http://localhost:3000/users')
+      .get(api + '/users')
       .then((response) => {
         commit('LOAD_USERS', response.data);
       })
@@ -41,7 +42,7 @@ export const actions = {
   },
   loadMessages({ commit }) {
     this.$axios
-      .get('http://localhost:3000/messages')
+      .get(api + '/messages')
       .then((response) => {
         commit('LOAD_MESSAGES', response.data);
       })
@@ -51,7 +52,7 @@ export const actions = {
   },
   sendMessage({ dispatch }, msg) {
     this.$axios
-      .post('http://localhost:3000/messages', msg, {
+      .post(api + '/messages', msg, {
         headers: {
           'Content-Type': 'application/json',
         },
