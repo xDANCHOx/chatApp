@@ -1,4 +1,5 @@
 # chatApp
+**Сhange *API_URL* in the *.env* file to url that *gitpod* will suggest**
 
 ## Build Setup
 
