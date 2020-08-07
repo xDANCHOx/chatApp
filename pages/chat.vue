@@ -16,7 +16,6 @@
                       class="rounded-circle user_img"
                       size="70px"
                     ></b-avatar>
-                    <span class="online_icon"></span>
                   </div>
                   <div class="user_info">
                     <span>{{ item.name }}</span>
@@ -80,7 +79,10 @@ export default {
     ...mapState(['user', 'messages', 'users']),
   },
   mounted() {
-    setInterval(() => this.$store.dispatch('loadMessages'), 2000);
+    setInterval(() => {
+      this.$store.dispatch('loadMessages');
+      this.$store.dispatch('loadUser');
+    }, 2000);
   },
   methods: {
     send() {
@@ -129,16 +131,6 @@ export default {
   height: 70px;
   width: 70px;
   border: 1.5px solid #f5f6fa;
-}
-.online_icon {
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  background-color: #4cd137;
-  border-radius: 50%;
-  bottom: 0.2em;
-  right: 0.4em;
-  border: 1.5px solid white;
 }
 .user_info {
   margin-top: auto;
